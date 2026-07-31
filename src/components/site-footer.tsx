@@ -15,16 +15,18 @@ export function SiteFooter() {
         <nav aria-label="Footer sections" className="font-sans text-sm">
           <h3 className="eyebrow text-muted-foreground">Sections</h3>
           <ul className="mt-4 space-y-2">
-            {[
-              ["/chapters", "All chapters"],
-              ["/timeline", "Timeline"],
-              ["/gallery", "Historical gallery"],
-              ["/maps", "Interactive maps"],
-              ["/genealogy", "Wadiyar genealogy"],
-              ["/glossary", "Glossary"],
-              ["/quiz", "Knowledge quiz"],
-              ["/references", "References & bibliography"],
-            ].map(([to, label]) => (
+            {(
+              [
+                ["/chapters", "All chapters"],
+                ["/timeline", "Timeline"],
+                ["/gallery", "Historical gallery"],
+                ["/maps", "Interactive maps"],
+                ["/genealogy", "Wadiyar genealogy"],
+                ["/glossary", "Glossary"],
+                ["/quiz", "Knowledge quiz"],
+                ["/references", "References & bibliography"],
+              ] as const
+            ).map(([to, label]) => (
               <li key={to}>
                 <Link to={to} className="text-muted-foreground transition-colors hover:text-foreground">
                   {label}
