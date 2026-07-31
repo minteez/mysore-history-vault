@@ -61,15 +61,21 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "The Complete History of Mysore" },
+      { title: "The Complete History of Mysore — Mysuru, Karnataka" },
       {
         name: "description",
         content:
-          "A cited, illustrated archive of the history of Mysuru, Karnataka — dynasties, culture and institutions.",
+          "A research-led, illustrated history of Mysuru: geography, the Gangas, Hoysalas, Vijayanagara, the Wadiyars, Tipu Sultan, the princely state and the modern city — fully cited.",
       },
       { property: "og:site_name", content: "The Complete History of Mysore" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:title", content: "The Complete History of Mysore — Mysuru, Karnataka" },
+      { name: "twitter:title", content: "The Complete History of Mysore — Mysuru, Karnataka" },
+      { property: "og:description", content: "A research-led, illustrated history of Mysuru: geography, the Gangas, Hoysalas, Vijayanagara, the Wadiyars, Tipu Sultan, the princely state and the modern city — fully cited." },
+      { name: "twitter:description", content: "A research-led, illustrated history of Mysuru: geography, the Gangas, Hoysalas, Vijayanagara, the Wadiyars, Tipu Sultan, the princely state and the modern city — fully cited." },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/a8d50066-b044-4481-ab32-8bb8f93e9f2d" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/a8d50066-b044-4481-ab32-8bb8f93e9f2d" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },

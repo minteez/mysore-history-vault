@@ -16,11 +16,11 @@ export const Route = createFileRoute("/")({
         content:
           "A research-led, illustrated history of Mysuru: geography, the Gangas, Hoysalas, Vijayanagara, the Wadiyars, Tipu Sultan, the princely state and the modern city — fully cited.",
       },
-      { property: "og:title", content: "The Complete History of Mysore" },
+      { property: "og:title", content: "The Complete History of Mysore — Mysuru, Karnataka" },
       {
         property: "og:description",
         content:
-          "Twenty-five cited chapters, a full timeline, gallery, maps, genealogy and bibliography on the history of Mysuru, Karnataka.",
+          "A research-led, illustrated history of Mysuru: geography, the Gangas, Hoysalas, Vijayanagara, the Wadiyars, Tipu Sultan, the princely state and the modern city — fully cited.",
       },
       { property: "og:url", content: "/" },
       { property: "og:type", content: "website" },
