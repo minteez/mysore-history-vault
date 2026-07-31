@@ -11,6 +11,11 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as GalleryRouteImport } from './routes/gallery'
+import { Route as GenealogyRouteImport } from './routes/genealogy'
+import { Route as GlossaryRouteImport } from './routes/glossary'
+import { Route as MapsRouteImport } from './routes/maps'
+import { Route as QuizRouteImport } from './routes/quiz'
+import { Route as ReferencesRouteImport } from './routes/references'
 import { Route as TimelineRouteImport } from './routes/timeline'
 import { Route as ChaptersIndexRouteImport } from './routes/chapters.index'
 import { Route as ChaptersSlugRouteImport } from './routes/chapters.$slug'
@@ -23,6 +28,31 @@ const IndexRoute = IndexRouteImport.update({
 const GalleryRoute = GalleryRouteImport.update({
   id: '/gallery',
   path: '/gallery',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GenealogyRoute = GenealogyRouteImport.update({
+  id: '/genealogy',
+  path: '/genealogy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GlossaryRoute = GlossaryRouteImport.update({
+  id: '/glossary',
+  path: '/glossary',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MapsRoute = MapsRouteImport.update({
+  id: '/maps',
+  path: '/maps',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const QuizRoute = QuizRouteImport.update({
+  id: '/quiz',
+  path: '/quiz',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReferencesRoute = ReferencesRouteImport.update({
+  id: '/references',
+  path: '/references',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TimelineRoute = TimelineRouteImport.update({
@@ -44,6 +74,11 @@ const ChaptersSlugRoute = ChaptersSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/gallery': typeof GalleryRoute
+  '/genealogy': typeof GenealogyRoute
+  '/glossary': typeof GlossaryRoute
+  '/maps': typeof MapsRoute
+  '/quiz': typeof QuizRoute
+  '/references': typeof ReferencesRoute
   '/timeline': typeof TimelineRoute
   '/chapters/$slug': typeof ChaptersSlugRoute
   '/chapters/': typeof ChaptersIndexRoute
@@ -51,6 +86,11 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/gallery': typeof GalleryRoute
+  '/genealogy': typeof GenealogyRoute
+  '/glossary': typeof GlossaryRoute
+  '/maps': typeof MapsRoute
+  '/quiz': typeof QuizRoute
+  '/references': typeof ReferencesRoute
   '/timeline': typeof TimelineRoute
   '/chapters/$slug': typeof ChaptersSlugRoute
   '/chapters': typeof ChaptersIndexRoute
@@ -59,19 +99,49 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/gallery': typeof GalleryRoute
+  '/genealogy': typeof GenealogyRoute
+  '/glossary': typeof GlossaryRoute
+  '/maps': typeof MapsRoute
+  '/quiz': typeof QuizRoute
+  '/references': typeof ReferencesRoute
   '/timeline': typeof TimelineRoute
   '/chapters/$slug': typeof ChaptersSlugRoute
   '/chapters/': typeof ChaptersIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/gallery' | '/timeline' | '/chapters/$slug' | '/chapters/'
+  fullPaths:
+    | '/'
+    | '/gallery'
+    | '/genealogy'
+    | '/glossary'
+    | '/maps'
+    | '/quiz'
+    | '/references'
+    | '/timeline'
+    | '/chapters/$slug'
+    | '/chapters/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/gallery' | '/timeline' | '/chapters/$slug' | '/chapters'
+  to:
+    | '/'
+    | '/gallery'
+    | '/genealogy'
+    | '/glossary'
+    | '/maps'
+    | '/quiz'
+    | '/references'
+    | '/timeline'
+    | '/chapters/$slug'
+    | '/chapters'
   id:
     | '__root__'
     | '/'
     | '/gallery'
+    | '/genealogy'
+    | '/glossary'
+    | '/maps'
+    | '/quiz'
+    | '/references'
     | '/timeline'
     | '/chapters/$slug'
     | '/chapters/'
@@ -80,6 +150,11 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   GalleryRoute: typeof GalleryRoute
+  GenealogyRoute: typeof GenealogyRoute
+  GlossaryRoute: typeof GlossaryRoute
+  MapsRoute: typeof MapsRoute
+  QuizRoute: typeof QuizRoute
+  ReferencesRoute: typeof ReferencesRoute
   TimelineRoute: typeof TimelineRoute
   ChaptersSlugRoute: typeof ChaptersSlugRoute
   ChaptersIndexRoute: typeof ChaptersIndexRoute
@@ -99,6 +174,41 @@ declare module '@tanstack/react-router' {
       path: '/gallery'
       fullPath: '/gallery'
       preLoaderRoute: typeof GalleryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/genealogy': {
+      id: '/genealogy'
+      path: '/genealogy'
+      fullPath: '/genealogy'
+      preLoaderRoute: typeof GenealogyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/glossary': {
+      id: '/glossary'
+      path: '/glossary'
+      fullPath: '/glossary'
+      preLoaderRoute: typeof GlossaryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/maps': {
+      id: '/maps'
+      path: '/maps'
+      fullPath: '/maps'
+      preLoaderRoute: typeof MapsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/quiz': {
+      id: '/quiz'
+      path: '/quiz'
+      fullPath: '/quiz'
+      preLoaderRoute: typeof QuizRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/references': {
+      id: '/references'
+      path: '/references'
+      fullPath: '/references'
+      preLoaderRoute: typeof ReferencesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/timeline': {
@@ -128,6 +238,11 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   GalleryRoute: GalleryRoute,
+  GenealogyRoute: GenealogyRoute,
+  GlossaryRoute: GlossaryRoute,
+  MapsRoute: MapsRoute,
+  QuizRoute: QuizRoute,
+  ReferencesRoute: ReferencesRoute,
   TimelineRoute: TimelineRoute,
   ChaptersSlugRoute: ChaptersSlugRoute,
   ChaptersIndexRoute: ChaptersIndexRoute,
