@@ -34,7 +34,6 @@ export const Route = createFileRoute("/")({
           "@type": "WebSite",
           name: "The Complete History of Mysore",
           about: "History of Mysuru, Karnataka, India",
-philosophy: undefined,
         }),
       },
     ],

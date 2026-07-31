@@ -65,7 +65,7 @@ function ChapterPage() {
       <p className="mt-6 text-xl leading-relaxed text-muted-foreground italic">{chapter.summary}</p>
 
       <ul className="mt-6 flex flex-wrap gap-2 font-sans text-xs">
-        {chapter.keywords.map((k) => (
+        {chapter.keywords.map((k: string) => (
           <li key={k} className="rounded-full bg-accent px-3 py-1 text-accent-foreground">
             {k}
           </li>
