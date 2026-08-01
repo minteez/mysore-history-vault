@@ -47,6 +47,27 @@ export function SiteFooter() {
           </p>
         </div>
       </div>
+      <div className="border-t border-border bg-parchment">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-4 py-6 text-center sm:px-6 sm:flex-row sm:text-left">
+          <p className="text-xs text-muted-foreground">
+            © 2026 The Complete History of Mysore. All rights reserved.
+          </p>
+          <p className="max-w-2xl text-xs text-muted-foreground">
+            Designed and developed by{" "}
+            <a
+              href="https://minteez.lovable.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline underline-offset-2 transition-colors hover:text-foreground"
+            >
+              Minteez
+            </a>{" "}
+            in collaboration with Lovable. This website is an educational and research-focused digital
+            archive dedicated to preserving and sharing the rich history, culture, and heritage of
+            Mysore through reliable historical sources and scholarly references.
+          </p>
+        </div>
+      </div>
     </footer>
   );
 }
