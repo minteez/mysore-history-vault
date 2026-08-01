@@ -31,7 +31,7 @@ const places = [
 ];
 
 function Maps() {
-  const [active, setActive] = useState(places[0]);
+  const [active, setActive] = useState(places[0]!);
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
