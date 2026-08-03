@@ -186,4 +186,7 @@ export const kn: Dictionary = {
   "meta.references.title": "ಆಕರಗಳು ಮತ್ತು ಆಕರಸೂಚಿ — ಮೈಸೂರಿನ ಸಂಪೂರ್ಣ ಇತಿಹಾಸ",
   "meta.references.description":
     "ಸಂಗ್ರಹಾಲಯದ ಹಿಂದಿನ ಸಂಪೂರ್ಣ ಆಕರಸೂಚಿ: ಶಾಸನಶಾಸ್ತ್ರ, ಗೆಜೆಟಿಯರ್‌ಗಳು, ಶೈಕ್ಷಣಿಕ ಇತಿಹಾಸಗಳು ಮತ್ತು ಸರ್ಕಾರಿ ಮೂಲಗಳು.",
+
+  // ---- Long-form content (chapters, timeline, glossary, quiz, …) -------
+  ...knContent,
 };
