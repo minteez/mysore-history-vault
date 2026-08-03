@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
+import { useI18n, useLocalizedMeta } from "@/i18n";
 
 export const Route = createFileRoute("/maps")({
   head: () => ({
@@ -31,26 +32,30 @@ const places = [
 ];
 
 function Maps() {
-  const [active, setActive] = useState(places[0]!);
+  const { t, tc } = useI18n();
+  useLocalizedMeta("meta.maps.title", "meta.maps.description");
+  const [activeIndex, setActiveIndex] = useState(0);
+  const active = places[activeIndex]!;
+  const activeName = tc(`content.place.${activeIndex}.name`, active.name);
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
-      <p className="eyebrow text-primary">Geography</p>
-      <h1 className="mt-3 font-display text-5xl">Interactive maps</h1>
+      <p className="eyebrow text-primary">{t("maps.eyebrow")}</p>
+      <h1 className="mt-3 font-display text-5xl">{t("maps.title")}</h1>
       <div className="rule-gold mt-4" />
       <div className="mt-10 grid gap-8 lg:grid-cols-[320px_1fr]">
         <ul className="space-y-2">
-          {places.map((p) => (
+          {places.map((p, i) => (
             <li key={p.name}>
               <button
-                onClick={() => setActive(p)}
-                aria-pressed={active.name === p.name}
+                onClick={() => setActiveIndex(i)}
+                aria-pressed={activeIndex === i}
                 className={`w-full rounded-lg border border-border p-4 text-left transition-colors ${
-                  active.name === p.name ? "bg-accent text-accent-foreground" : "bg-card"
+                  activeIndex === i ? "bg-accent text-accent-foreground" : "bg-card"
                 }`}
               >
-                <span className="block font-display text-xl">{p.name}</span>
-                <span className="mt-1 block font-sans text-xs text-muted-foreground">{p.period}</span>
+                <span className="block font-display text-xl">{tc(`content.place.${i}.name`, p.name)}</span>
+                <span className="mt-1 block font-sans text-xs text-muted-foreground">{tc(`content.place.${i}.period`, p.period)}</span>
               </button>
             </li>
           ))}
@@ -58,14 +63,14 @@ function Maps() {
         <div className="surface-card overflow-hidden rounded-lg">
           <iframe
             key={active.q}
-            title={`Map of ${active.name}`}
+            title={t("a11y.mapOf", { name: activeName })}
             src={`https://www.google.com/maps?q=${encodeURIComponent(active.q)}&output=embed`}
             loading="lazy"
             className="h-[420px] w-full border-0 sm:h-[560px]"
           />
           <div className="p-5">
-            <h2 className="font-display text-2xl">{active.name}</h2>
-            <p className="mt-1 text-muted-foreground">{active.note}</p>
+            <h2 className="font-display text-2xl">{activeName}</h2>
+            <p className="mt-1 text-muted-foreground">{tc(`content.place.${activeIndex}.note`, active.note)}</p>
           </div>
         </div>
       </div>

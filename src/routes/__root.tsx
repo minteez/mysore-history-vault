@@ -13,18 +13,20 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { I18nProvider, useI18n } from "@/i18n";
 
 function NotFoundComponent() {
+  const { t } = useI18n();
   return (
     <div className="flex min-h-[70dvh] items-center justify-center px-4">
       <div className="max-w-md text-center">
         <h1 className="font-display text-7xl">404</h1>
-        <p className="mt-4 text-muted-foreground">This page is not part of the archive.</p>
+        <p className="mt-4 text-muted-foreground">{t("notFound.body")}</p>
         <Link
           to="/"
           className="mt-6 inline-flex items-center rounded-md bg-primary px-4 py-2 font-sans text-sm text-primary-foreground"
         >
-          Return to the homepage
+          {t("notFound.home")}
         </Link>
       </div>
     </div>
@@ -34,6 +36,7 @@ function NotFoundComponent() {
 function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   console.error(error);
   const router = useRouter();
+  const { t } = useI18n();
   useEffect(() => {
     reportLovableError(error, { boundary: "tanstack_root_error_component" });
   }, [error]);
@@ -41,7 +44,7 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   return (
     <div className="flex min-h-[70dvh] items-center justify-center px-4">
       <div className="max-w-md text-center">
-        <h1 className="font-display text-2xl">This page didn't load</h1>
+        <h1 className="font-display text-2xl">{t("error.title")}</h1>
         <button
           onClick={() => {
             router.invalidate();
@@ -49,7 +52,7 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
           }}
           className="mt-6 rounded-md bg-primary px-4 py-2 font-sans text-sm text-primary-foreground"
         >
-          Try again
+          {t("error.retry")}
         </button>
       </div>
     </div>
@@ -101,7 +104,7 @@ function RootShell({ children }: { children: ReactNode }) {
         <HeadContent />
       </head>
       <body>
-        {children}
+        <I18nProvider>{children}</I18nProvider>
         <Scripts />
       </body>
     </html>
@@ -110,6 +113,7 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const { t } = useI18n();
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -117,7 +121,7 @@ function RootComponent() {
         href="#main"
         className="sr-only font-sans focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-100 focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-primary-foreground"
       >
-        Skip to content
+        {t("a11y.skip")}
       </a>
       <SiteHeader />
       <main id="main">

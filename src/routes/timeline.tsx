@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { eras, sortedTimeline } from "@/data/timeline";
+import { eras, sortedTimeline, timeline } from "@/data/timeline";
+import { useI18n, useLocalizedMeta } from "@/i18n";
 
 export const Route = createFileRoute("/timeline")({
   head: () => ({
@@ -21,13 +22,15 @@ export const Route = createFileRoute("/timeline")({
 });
 
 function TimelinePage() {
+  const { t, tc } = useI18n();
+  useLocalizedMeta("meta.timeline.title", "meta.timeline.description");
   const [era, setEra] = useState<string>("All");
   const events = era === "All" ? sortedTimeline : sortedTimeline.filter((e) => e.era === era);
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6">
-      <p className="eyebrow text-primary">Chronology</p>
-      <h1 className="mt-3 font-display text-5xl">Timeline</h1>
+      <p className="eyebrow text-primary">{t("timeline.eyebrow")}</p>
+      <h1 className="mt-3 font-display text-5xl">{t("timeline.title")}</h1>
       <div className="rule-gold mt-4" />
 
       <div className="mt-8 flex flex-wrap gap-2 font-sans text-sm">
@@ -40,7 +43,7 @@ function TimelinePage() {
               era === e ? "bg-primary text-primary-foreground" : "bg-card text-muted-foreground"
             }`}
           >
-            {e}
+            {e === "All" ? t("timeline.all") : tc(`content.era.${e}`, e)}
           </button>
         ))}
       </div>
@@ -50,15 +53,17 @@ function TimelinePage() {
           <li key={e.title} className="relative mb-10 animate-rise">
             <span className="absolute top-2 -left-[31px] size-3 rounded-full bg-gold ring-4 ring-background" />
             <p className="font-sans text-sm tracking-wide text-primary">{e.year}</p>
-            <h2 className="mt-1 font-display text-2xl">{e.title}</h2>
-            <p className="mt-2 text-muted-foreground">{e.description}</p>
+            <h2 className="mt-1 font-display text-2xl">{tc(`content.timeline.${timeline.indexOf(e)}.title`, e.title)}</h2>
+            <p className="mt-2 text-muted-foreground">
+              {tc(`content.timeline.${timeline.indexOf(e)}.description`, e.description)}
+            </p>
             {e.chapter && (
               <Link
                 to="/chapters/$slug"
                 params={{ slug: e.chapter }}
                 className="mt-2 inline-block font-sans text-sm text-primary underline underline-offset-4"
               >
-                Read more
+                {t("timeline.readMore")}
               </Link>
             )}
           </li>

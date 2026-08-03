@@ -4,19 +4,22 @@ import { Menu, Moon, Search, Sun } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import { SearchDialog } from "./search-dialog";
+import { LanguageSelect } from "./language-select";
+import { useI18n } from "@/i18n";
 
 const nav = [
-  { to: "/chapters", label: "Chapters" },
-  { to: "/timeline", label: "Timeline" },
-  { to: "/gallery", label: "Gallery" },
-  { to: "/maps", label: "Maps" },
-  { to: "/genealogy", label: "Genealogy" },
-  { to: "/glossary", label: "Glossary" },
-  { to: "/quiz", label: "Quiz" },
-  { to: "/references", label: "References" },
+  { to: "/chapters", key: "nav.chapters" },
+  { to: "/timeline", key: "nav.timeline" },
+  { to: "/gallery", key: "nav.gallery" },
+  { to: "/maps", key: "nav.maps" },
+  { to: "/genealogy", key: "nav.genealogy" },
+  { to: "/glossary", key: "nav.glossary" },
+  { to: "/quiz", key: "nav.quiz" },
+  { to: "/references", key: "nav.references" },
 ] as const;
 
 function ThemeToggle() {
+  const { t } = useI18n();
   const [dark, setDark] = useState(false);
 
   useEffect(() => {
@@ -39,7 +42,7 @@ function ThemeToggle() {
       variant="ghost"
       size="icon"
       onClick={toggle}
-      aria-label={dark ? "Switch to light theme" : "Switch to dark theme"}
+      aria-label={dark ? t("a11y.themeLight") : t("a11y.themeDark")}
       className="min-h-11 min-w-11"
     >
       {dark ? <Moon className="size-4" /> : <Sun className="size-4" />}
@@ -48,6 +51,7 @@ function ThemeToggle() {
 }
 
 export function SiteHeader() {
+  const { t } = useI18n();
   const [searchOpen, setSearchOpen] = useState(false);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
@@ -71,16 +75,16 @@ export function SiteHeader() {
           </span>
           <span className="min-w-0">
             <span className="block truncate font-display text-lg leading-tight font-semibold sm:text-xl">
-              The Complete History of Mysore
+              {t("site.title")}
             </span>
             <span className="eyebrow hidden text-muted-foreground sm:block">
-              Mysuru · Karnataka · An illustrated archive
+              {t("site.tagline")}
             </span>
           </span>
         </Link>
 
         <div className="flex items-center gap-1">
-          <nav aria-label="Primary" className="hidden items-center gap-1 xl:flex">
+          <nav aria-label={t("a11y.primaryNav")} className="hidden items-center gap-1 xl:flex">
             {nav.map((item) => (
               <Link
                 key={item.to}
@@ -88,7 +92,7 @@ export function SiteHeader() {
                 className="rounded-md px-3 py-2 font-sans text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground data-[status=active]:text-foreground"
                 activeProps={{ className: "text-foreground font-medium" }}
               >
-                {item.label}
+                {t(item.key)}
               </Link>
             ))}
           </nav>
@@ -96,28 +100,31 @@ export function SiteHeader() {
           <Button
             variant="ghost"
             size="icon"
-            aria-label="Search the archive"
+            aria-label={t("a11y.search")}
             className="min-h-11 min-w-11"
             onClick={() => setSearchOpen(true)}
           >
             <Search className="size-4" />
           </Button>
           <ThemeToggle />
+          <div className="hidden sm:block">
+            <LanguageSelect compact />
+          </div>
 
           <Sheet>
             <SheetTrigger asChild>
               <Button
                 variant="ghost"
                 size="icon"
-                aria-label="Open navigation menu"
+                aria-label={t("a11y.openMenu")}
                 className="min-h-11 min-w-11 xl:hidden"
               >
                 <Menu className="size-4" />
               </Button>
             </SheetTrigger>
             <SheetContent side="right" className="w-72">
-              <SheetTitle className="font-display text-xl">Navigate</SheetTitle>
-              <nav aria-label="Mobile" className="mt-6 flex flex-col gap-1">
+              <SheetTitle className="font-display text-xl">{t("header.navigate")}</SheetTitle>
+              <nav aria-label={t("a11y.mobileNav")} className="mt-6 flex flex-col gap-1">
                 {nav.map((item) => (
                   <Link
                     key={item.to}
@@ -126,10 +133,14 @@ export function SiteHeader() {
                       pathname === item.to ? "bg-accent text-accent-foreground" : "text-foreground"
                     }`}
                   >
-                    {item.label}
+                    {t(item.key)}
                   </Link>
                 ))}
               </nav>
+              <div className="mt-6 sm:hidden">
+                <p className="eyebrow mb-2 text-muted-foreground">{t("lang.label")}</p>
+                <LanguageSelect />
+              </div>
             </SheetContent>
           </Sheet>
         </div>

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { quiz } from "@/data/quiz";
+import { useI18n, useLocalizedMeta } from "@/i18n";
 
 export const Route = createFileRoute("/quiz")({
   head: () => ({
@@ -21,17 +22,19 @@ export const Route = createFileRoute("/quiz")({
 });
 
 function QuizPage() {
+  const { t, tc } = useI18n();
+  useLocalizedMeta("meta.quiz.title", "meta.quiz.description");
   const [answers, setAnswers] = useState<Record<number, number>>({});
   const score = quiz.reduce((n, q, i) => (answers[i] === q.answer ? n + 1 : n), 0);
   const answered = Object.keys(answers).length;
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
-      <p className="eyebrow text-primary">Learning</p>
-      <h1 className="mt-3 font-display text-5xl">Knowledge quiz</h1>
+      <p className="eyebrow text-primary">{t("quiz.eyebrow")}</p>
+      <h1 className="mt-3 font-display text-5xl">{t("quiz.title")}</h1>
       <div className="rule-gold mt-4" />
       <p className="mt-6 text-muted-foreground" aria-live="polite">
-        Answered {answered} of {quiz.length} · Score {score}
+        {t("quiz.progress", { answered, total: quiz.length, score })}
       </p>
 
       <ol className="mt-10 space-y-8">
@@ -39,7 +42,7 @@ function QuizPage() {
           const chosen = answers[i];
           return (
             <li key={q.question} className="surface-card rounded-lg p-6">
-              <h2 className="font-display text-2xl">{q.question}</h2>
+              <h2 className="font-display text-2xl">{tc(`content.quiz.${i}.question`, q.question)}</h2>
               <div className="mt-4 grid gap-2">
                 {q.options.map((opt, oi) => {
                   const isChosen = chosen === oi;
@@ -59,13 +62,13 @@ function QuizPage() {
                       disabled={chosen !== undefined}
                       className={`min-h-11 rounded-md border px-4 py-3 text-left font-sans text-sm ${state}`}
                     >
-                      {opt}
+                      {tc(`content.quiz.${i}.option.${oi}`, opt)}
                     </button>
                   );
                 })}
               </div>
               {chosen !== undefined && (
-                <p className="mt-4 font-sans text-sm text-muted-foreground">{q.explanation}</p>
+                <p className="mt-4 font-sans text-sm text-muted-foreground">{tc(`content.quiz.${i}.explanation`, q.explanation)}</p>
               )}
             </li>
           );

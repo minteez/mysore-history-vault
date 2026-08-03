@@ -9,7 +9,8 @@ import {
 } from "@/components/ui/command";
 import { chapters } from "@/data/chapters";
 import { glossary } from "@/data/glossary";
-import { sortedTimeline } from "@/data/timeline";
+import { sortedTimeline, timeline } from "@/data/timeline";
+import { useI18n } from "@/i18n";
 
 export function SearchDialog({
   open,
@@ -19,6 +20,7 @@ export function SearchDialog({
   onOpenChange: (v: boolean) => void;
 }) {
   const navigate = useNavigate();
+  const { t, tc } = useI18n();
 
   const go = (to: string) => {
     onOpenChange(false);
@@ -27,42 +29,42 @@ export function SearchDialog({
 
   return (
     <CommandDialog open={open} onOpenChange={onOpenChange}>
-      <CommandInput placeholder="Search chapters, events, glossary…" />
+      <CommandInput placeholder={t("search.placeholder")} />
       <CommandList>
-        <CommandEmpty>No matching entry in the archive.</CommandEmpty>
-        <CommandGroup heading="Chapters">
+        <CommandEmpty>{t("search.empty")}</CommandEmpty>
+        <CommandGroup heading={t("search.chapters")}>
           {chapters.map((c) => (
             <CommandItem
               key={c.slug}
-              value={`${c.title} ${c.period} ${c.keywords.join(" ")} ${c.summary}`}
+              value={`${c.title} ${tc(`content.chapter.${c.slug}.title`, "")} ${c.period} ${c.keywords.join(" ")} ${c.summary}`}
               onSelect={() => go(`/chapters/${c.slug}`)}
             >
-              <span className="font-medium">{c.title}</span>
-              <span className="ml-2 text-xs text-muted-foreground">{c.period}</span>
+              <span className="font-medium">{tc(`content.chapter.${c.slug}.title`, c.title)}</span>
+              <span className="ml-2 text-xs text-muted-foreground">{tc(`content.chapter.${c.slug}.period`, c.period)}</span>
             </CommandItem>
           ))}
         </CommandGroup>
-        <CommandGroup heading="Timeline events">
+        <CommandGroup heading={t("search.events")}>
           {sortedTimeline.map((e) => (
             <CommandItem
               key={e.title}
-              value={`${e.year} ${e.title} ${e.description}`}
+              value={`${e.year} ${e.title} ${tc(`content.timeline.${timeline.indexOf(e)}.title`, "")} ${e.description}`}
               onSelect={() => go(e.chapter ? `/chapters/${e.chapter}` : "/timeline")}
             >
               <span className="w-28 shrink-0 font-sans text-xs text-muted-foreground">{e.year}</span>
-              <span className="truncate">{e.title}</span>
+              <span className="truncate">{tc(`content.timeline.${timeline.indexOf(e)}.title`, e.title)}</span>
             </CommandItem>
           ))}
         </CommandGroup>
-        <CommandGroup heading="Glossary">
+        <CommandGroup heading={t("search.glossary")}>
           {glossary.map((g) => (
             <CommandItem
               key={g.term}
-              value={`${g.term} ${g.definition}`}
+              value={`${g.term} ${tc(`content.glossary.${g.term}.term`, "")} ${g.definition}`}
               onSelect={() => go("/glossary")}
             >
-              <span className="font-medium">{g.term}</span>
-              <span className="ml-2 truncate text-xs text-muted-foreground">{g.definition}</span>
+              <span className="font-medium">{tc(`content.glossary.${g.term}.term`, g.term)}</span>
+              <span className="ml-2 truncate text-xs text-muted-foreground">{tc(`content.glossary.${g.term}.definition`, g.definition)}</span>
             </CommandItem>
           ))}
         </CommandGroup>
