@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { bibliography, editorialNote } from "@/data/sources";
+import { useI18n, useLocalizedMeta } from "@/i18n";
 
 export const Route = createFileRoute("/references")({
   head: () => ({
@@ -20,17 +21,19 @@ export const Route = createFileRoute("/references")({
 });
 
 function References() {
+  const { t, tc } = useI18n();
+  useLocalizedMeta("meta.references.title", "meta.references.description");
   return (
     <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6">
-      <p className="eyebrow text-primary">Sourcing</p>
-      <h1 className="mt-3 font-display text-5xl">References and bibliography</h1>
+      <p className="eyebrow text-primary">{t("references.eyebrow")}</p>
+      <h1 className="mt-3 font-display text-5xl">{t("references.title")}</h1>
       <div className="rule-gold mt-4" />
-      <p className="mt-6 text-muted-foreground">{editorialNote}</p>
+      <p className="mt-6 text-muted-foreground">{tc("content.editorialNote", editorialNote)}</p>
 
       <div className="mt-12 space-y-10">
         {bibliography.map((group) => (
           <section key={group.category}>
-            <h2 className="font-display text-2xl">{group.category}</h2>
+            <h2 className="font-display text-2xl">{tc(`content.bibliographyCategory.${group.category}`, group.category)}</h2>
             <ul className="mt-4 space-y-3 font-sans text-sm">
               {group.entries.map((e) => (
                 <li key={e.text} className="surface-card rounded-md p-4 text-muted-foreground">
@@ -42,7 +45,7 @@ function References() {
                       rel="noreferrer noopener"
                       className="text-primary underline underline-offset-4"
                     >
-                      Link
+                      {t("references.link")}
                     </a>
                   )}
                 </li>

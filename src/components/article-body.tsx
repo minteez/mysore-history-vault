@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import type { Chapter } from "@/data/chapters";
+import { useI18n } from "@/i18n";
 
 /** Renders paragraph text, converting [n] markers into footnote links. */
 function withFootnotes(text: string, slug: string): ReactNode[] {
@@ -23,6 +24,7 @@ function withFootnotes(text: string, slug: string): ReactNode[] {
 }
 
 export function ArticleBody({ chapter }: { chapter: Chapter }) {
+  const { t } = useI18n();
   return (
     <article className="mt-10">
       {chapter.sections.map((section, idx) => (
@@ -44,7 +46,7 @@ export function ArticleBody({ chapter }: { chapter: Chapter }) {
 
       <section aria-labelledby={`${chapter.slug}-references`} className="surface-card rounded-lg p-6">
         <h2 id={`${chapter.slug}-references`} className="font-display text-2xl">
-          References and footnotes
+          {t("chapter.references")}
         </h2>
         <div className="rule-gold mt-3" />
         <ol className="mt-5 space-y-3 font-sans text-sm">
@@ -60,7 +62,7 @@ export function ArticleBody({ chapter }: { chapter: Chapter }) {
                     rel="noreferrer noopener"
                     className="text-primary underline underline-offset-4"
                   >
-                    Link
+                    {t("chapter.link")}
                   </a>
                 )}
               </span>
