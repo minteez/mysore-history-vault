@@ -1,4 +1,5 @@
 import type { Dictionary } from "./en";
+import { knContent } from "./kn.content";
 
 /**
  * ಕನ್ನಡ (Kannada). Keys missing here fall back to English at runtime.
