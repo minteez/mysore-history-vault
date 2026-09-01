@@ -51,14 +51,7 @@ export function SiteFooter() {
           <p className="text-xs text-muted-foreground">{t("footer.copyright")}</p>
           <p className="max-w-2xl text-xs text-muted-foreground">
             {t("footer.creditsPre")}{" "}
-            <a
-              href="https://minteez.lovable.app"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline underline-offset-2 transition-colors hover:text-foreground"
-            >
-              Minteez
-            </a>{" "}
+            Minteez{" "}
             {t("footer.creditsPost")}{" "}
             <a
               href="https://minteez.lovable.app"
