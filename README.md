@@ -10,7 +10,16 @@ Timeline page
 <img width="1582" height="900" alt="image" src="https://github.com/user-attachments/assets/8a94a1cc-0a87-46f4-a682-a00edb0a10fc" />
 Gallery page
 <img width="1584" height="900" alt="image" src="https://github.com/user-attachments/assets/c0153484-4f39-4d8d-bb9c-0e4c4200d2c0" />
-
+Maps page
+<img width="1583" height="900" alt="image" src="https://github.com/user-attachments/assets/5100f63a-c951-488a-aa78-10c70f374f6d" />
+Wadiyar Geneology page
+<img width="1582" height="900" alt="image" src="https://github.com/user-attachments/assets/7fb9e141-62ee-4896-a4ea-b4f3193ba3b6" />
+Glossary page
+<img width="1582" height="900" alt="image" src="https://github.com/user-attachments/assets/7accf6d1-2bbd-4667-b160-2a076301e067" />
+Quiz page
+<img width="1585" height="900" alt="image" src="https://github.com/user-attachments/assets/40601513-11d5-4d16-966c-0b33d3040338" />
+References and bibliography page
+<img width="1584" height="900" alt="image" src="https://github.com/user-attachments/assets/146d897f-004b-4f40-b112-bc92a2554598" />
 
 **The Complete History of Mysore** is an educational and research-oriented digital archive dedicated to documenting the rich and diverse history of **Mysore (Mysuru), Karnataka, India**. The website traces the region's story from ancient settlements and early dynasties through the Vijayanagara period, the Wadiyar dynasty, the reigns of Hyder Ali and Tipu Sultan, British influence, the Princely State of Mysore, Indian independence, the formation of Karnataka, and the development of modern Mysuru.
 
